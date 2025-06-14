@@ -113,6 +113,23 @@
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
+
+        #startBtn {
+            margin-top: 20px;
+            font-size: 20px;
+            padding: 10px 30px;
+            background: #00ff88;
+            border: none;
+            border-radius: 8px;
+            color: #222;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px #00ff88;
+            transition: background 0.2s;
+        }
+        #startBtn:hover {
+            background: #00cc66;
+        }
     </style>
 </head>
 <body>
@@ -129,6 +146,7 @@
             <div class="screen-text">↔️ 좌우 화살표키 또는 터치로 이동</div>
             <div class="screen-text">🚀 운석을 피해 최대한 오래 생존하세요!</div>
             <div class="screen-text blink">스페이스바를 눌러 시작하세요</div>
+            <button id="startBtn">게임 시작</button>
         </div>
         
         <div id="gameOverScreen">
@@ -455,9 +473,15 @@
     }
 }
 
-// 게임 시작
+// 게임 시작 및 버튼 이벤트 연결
 window.addEventListener('load', () => {
-    new Game();
+    window.gameInstance = new Game();
+    document.getElementById('startBtn').addEventListener('click', () => {
+        if (window.gameInstance && 
+            (window.gameInstance.gameState === 'start' || window.gameInstance.gameState === 'gameOver')) {
+            window.gameInstance.startGame();
+        }
+    });
 });
     </script>
 </body>
